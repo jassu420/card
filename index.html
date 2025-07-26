@@ -20,25 +20,101 @@
             <li><a href="#home">Home</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#contact">Contact</a></li>
-            <li><a href="#dashboard">Dashboard</a></li>
+          
             <li><a href="#login">Login</a></li>
             <li><a href="#register">Register</a></li>
         </ul>
     </nav>
+    
     <header class="hero" id="home">
-        <div class="hero-content">
-            <h1>Create Stunning Digital Business Cards</h1>
-            <p>Design, customize, and share your professional digital card in minutes. Stand out with Cardify, your modern card maker inspired by Canva.</p>
-            <a href="#dashboard" class="cta-btn">Get Started</a>
+    <div class="hero-bg-shape animated-bg"></div>
+    <div class="hero-content animate-fadein">
+        <h1 class="animate-slideup"><span class="gradient-text">Create Stunning</span><br>Digital Business Cards</h1>
+        <p class="hero-sub animate-slideup" style="animation-delay:0.2s">Design, customize, and share your professional digital card in minutes.<br>Stand out with <span class="brand">Cardify</span>, your modern card maker inspired by Canva.</p>
+        <div class="hero-actions animate-slideup" style="animation-delay:0.4s">
+            <a href="#" class="cta-btn cta-primary" id="openCardModal">Create Your Card</a>
+            <a href="#features" class="cta-btn cta-secondary">See Features</a>
         </div>
-        <div class="hero-image">
-            <img src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=600&q=80" alt="Digital Card Example">
+    </div>
+    <div class="hero-image-card animate-floatin">
+        <div class="card-mockup">
+            <div class="card-header">
+                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Profile" class="profile-pic">
+                <div>
+                    <h3>Alex Carter</h3>
+                    <p>UI/UX Designer</p>
+                </div>
+            </div>
+            <div class="card-body">
+                <p><strong>Email:</strong> alex.carter@email.com</p>
+                <p><strong>Phone:</strong> +1 234 567 8901</p>
+                <p><strong>Website:</strong> www.alexcarter.com</p>
+            </div>
+            <div class="card-footer">
+                <a href="#" class="card-btn">Connect</a>
+            </div>
         </div>
+       
     </header>
-    <section class="about" id="about">
-        <h2>About Cardify</h2>
-        <p>Cardify is a digital card maker platform that lets you create beautiful, shareable business cards online. Choose from modern templates, customize your details, and impress your contacts.</p>
+
+    <!-- Sample Cards Section -->
+    <section class="sample-cards" id="sample-cards">
+        <h2>Sample Digital Business Cards</h2>
+        <div class="sample-cards-grid">
+            <div class="card-mockup">
+                <div class="card-header">
+                    <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Profile" class="profile-pic">
+                    <div>
+                        <h3>Samir Patel</h3>
+                        <p>Co-Founder & CEO</p>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p><strong>Email:</strong> samir.patel@email.com</p>
+                    <p><strong>Phone:</strong> +1 555 123 4567</p>
+                    <p><strong>Website:</strong> www.samirpatel.com</p>
+                </div>
+            </div>
+            <div class="card-mockup">
+                <div class="card-header">
+                    <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Profile" class="profile-pic">
+                    <div>
+                        <h3>Lisa Wong</h3>
+                        <p>Lead Designer</p>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p><strong>Email:</strong> lisa.wong@email.com</p>
+                    <p><strong>Phone:</strong> +1 555 987 6543</p>
+                    <p><strong>Website:</strong> www.lisawong.com</p>
+                </div>
+            </div>
+            <div class="card-mockup">
+                <div class="card-header">
+                    <img src="https://randomuser.me/api/portraits/men/77.jpg" alt="Profile" class="profile-pic">
+                    <div>
+                        <h3>David Kim</h3>
+                        <p>Head of Engineering</p>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p><strong>Email:</strong> david.kim@email.com</p>
+                    <p><strong>Phone:</strong> +1 555 222 3344</p>
+                    <p><strong>Website:</strong> www.davidkim.com</p>
+                </div>
+            </div>
+        </div>
+        <div class="sample-cards-cta">
+            <a href="#" class="cta-btn cta-primary" id="openCardModal2">Create Your Own Card</a>
+        </div>
     </section>
+
+    <!-- User Created Card Section -->
+    <section class="user-card-section" id="user-card-section" style="display:none;">
+        <h2>Your Digital Business Cards</h2>
+        <div id="userCardOnPage"></div>
+    </section>
+   
 
     <section class="features" id="features">
         <h2>Features</h2>
@@ -85,5 +161,72 @@
     <footer>
         <p>&copy; 2025 Cardify. All rights reserved.</p>
     </footer>
+    <!-- Digital Card Modal -->
+    <div class="modal-overlay" id="cardModalOverlay">
+        <div class="modal-card-form">
+            <button class="modal-close" id="closeCardModal">&times;</button>
+            <h2>Create Your Digital Card</h2>
+            <form id="userCardForm">
+                <input type="text" id="userName" placeholder="Your Name" required>
+                <input type="text" id="userTitle" placeholder="Your Title" required>
+                <input type="email" id="userEmail" placeholder="Your Email" required>
+                <input type="text" id="userPhone" placeholder="Your Phone" required>
+               
+                <input type="url" id="userPhoto" placeholder="Profile Photo URL (optional)">
+                <button type="submit" class="cta-btn cta-primary">Preview Card</button>
+            </form>
+            <div id="userCardPreview" class="user-card-preview" style="display:none;"></div>
+        </div>
+    </div>
+    <script>
+    // Modal open/close logic
+    const openBtn = document.getElementById('openCardModal');
+    const openBtn2 = document.getElementById('openCardModal2');
+    const modal = document.getElementById('cardModalOverlay');
+    const closeBtn = document.getElementById('closeCardModal');
+    openBtn.addEventListener('click', e => { e.preventDefault(); modal.style.display = 'flex'; });
+    if(openBtn2) openBtn2.addEventListener('click', e => { e.preventDefault(); modal.style.display = 'flex'; });
+    closeBtn.addEventListener('click', () => { modal.style.display = 'none'; document.getElementById('userCardPreview').style.display = 'none'; });
+    window.addEventListener('click', e => { if(e.target === modal) { modal.style.display = 'none'; document.getElementById('userCardPreview').style.display = 'none'; } });
+
+    // Card creation logic
+    document.getElementById('userCardForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const name = document.getElementById('userName').value;
+        const title = document.getElementById('userTitle').value;
+        const email = document.getElementById('userEmail').value;
+        const phone = document.getElementById('userPhone').value;
+        const website = document.getElementById('userWebsite') ? document.getElementById('userWebsite').value : '';
+        const photo = document.getElementById('userPhoto').value || 'https://randomuser.me/api/portraits/lego/1.jpg';
+        const preview = document.getElementById('userCardPreview');
+        const cardHTML = `
+            <div class='card-mockup user-card-mockup'>
+                <div class='card-header'>
+                    <img src='${photo}' alt='Profile' class='profile-pic'>
+                    <div>
+                        <h3>${name}</h3>
+                        <p>${title}</p>
+                    </div>
+                </div>
+                <div class='card-body'>
+                    <p><strong>Email:</strong> ${email}</p>
+                    <p><strong>Phone:</strong> ${phone}</p>
+                    <p><strong>Website:</strong> ${website ? website : ''}</p>
+                </div>
+            </div>
+        `;
+        preview.innerHTML = cardHTML;
+        preview.style.display = 'block';
+        // Show card(s) on main page (append, not replace)
+        const userCardSection = document.getElementById('user-card-section');
+        const userCardOnPage = document.getElementById('userCardOnPage');
+        const cardDiv = document.createElement('div');
+        cardDiv.innerHTML = cardHTML;
+        userCardOnPage.appendChild(cardDiv.firstElementChild);
+        userCardSection.style.display = 'block';
+        // Optionally close modal after preview
+        modal.style.display = 'none';
+    });
+    </script>
 </body>
 </html>
